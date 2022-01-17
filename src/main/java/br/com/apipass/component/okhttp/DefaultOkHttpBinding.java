@@ -146,10 +146,6 @@ public class DefaultOkHttpBinding implements OkHttpBinding {
                 Object data = in.getBody();
                 if (data != null) {
                    if (data instanceof String) {
-                        // be a bit careful with String as any type can most likely be converted to String
-                        // so we only do an instanceof check and accept String if the body is really a String
-                        // do not fallback to use the default charset as it can influence the request
-                        // (for example application/x-www-form-urlencoded forms being sent)
                         if (charset != null) {
                             body = RequestBody.create(((String) data).getBytes(charset), MediaType.parse(contentType));
                         } else {
